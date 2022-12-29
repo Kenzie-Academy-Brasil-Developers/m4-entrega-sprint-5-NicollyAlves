@@ -1,8 +1,18 @@
+import { Request, Response } from "express"
+import { IPropertyRequest } from "../interfaces/properties"
+import createPropertyService from "../services/properties/createProperty.service"
 import listPropertiesService from "../services/properties/listProperties.service"
+
+const createPropertyController = async (req: Request, res: Response) => {
+    const propertyData: IPropertyRequest = req.validBody
+    const newProperty = await createPropertyService(propertyData)    
+    return res.status(201).json(newProperty)
+}
 
 const listPropertiesController = async (req: Request, res: Response) => {
     const properties = await listPropertiesService()
-    res.json(properties)
+    
+    return res.status(200).json(properties)
 }
 
-export { listPropertiesController }
+export { createPropertyController, listPropertiesController }

@@ -5,14 +5,14 @@ import listCategoriesService from "../services/categories/listCategories.service
 import listCategoryService from "../services/categories/listCategory.service"
 
 const createCategoryController = async (req: Request, res: Response) => {
-    const categoryData: ICategoryRequest = req.body
+    const categoryData: ICategoryRequest = req.validBody
     const newCategory = await createCategoryService(categoryData)
     return res.status(201).json(newCategory)
 }
 
 const listCategoriesController = async (req: Request, res: Response) => {
     const categories = await listCategoriesService()
-    res.json(categories)
+    return res.status(200).json(categories)
 }
 
 const listCategoryController = async (req: Request, res: Response) => {

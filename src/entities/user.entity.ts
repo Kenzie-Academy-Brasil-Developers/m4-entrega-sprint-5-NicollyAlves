@@ -7,9 +7,10 @@ import {
     BeforeUpdate,
     ManyToMany,
     JoinTable,
+    OneToMany,
 } from "typeorm";
 import { hashSync } from "bcryptjs"
-import { UserProperties } from "./schedules_user_properties.entity";
+import { Schedule } from "./schedules_user_properties.entity";
 
 @Entity("users")
 class User {
@@ -43,9 +44,8 @@ class User {
         this.password = hashSync(this.password, 10)
     }
 
-    @ManyToMany(() => UserProperties, (userProperties) => userProperties.user)
-    @JoinTable()
-    schedules: UserProperties[]
+    @OneToMany(() => Schedule, (schedule) => schedule.user)
+    schedules: Schedule[]
 }
 
 export { User }

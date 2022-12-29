@@ -1,9 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Properties } from "./properties.entity";
 import { User } from "./user.entity";
 
-@Entity("schedules_user_properties")
-class UserProperties {
+@Entity("schedules")
+class Schedule {
     @PrimaryGeneratedColumn("uuid")
     id: string
 
@@ -13,11 +13,14 @@ class UserProperties {
     @Column({ type: "time" })
     hour: string
 
-    @ManyToOne(() => Properties, (properties) => properties.id)
+    @ManyToOne(() => Properties, (properties) => properties.schedules)
+    @JoinColumn({ name: "propertyId"})
     property: Properties
-
-    @ManyToOne(() => User, (users) => users.id)
+    
+    @ManyToOne(() => User, (users) => users.schedules)
+    @JoinColumn({ name: "userId" })
     user: User
+
 }
 
-export { UserProperties }
+export { Schedule }

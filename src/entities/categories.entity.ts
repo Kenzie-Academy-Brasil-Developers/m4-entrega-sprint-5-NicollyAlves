@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Properties } from "./properties.entity";
 
 @Entity("categories")
@@ -9,8 +9,8 @@ class Categories {
     @Column()
     name: string
 
-    @ManyToOne(() => Properties, (properties) => properties.category)
-    properties: Properties
+    @OneToMany(() => Properties, (properties) => properties.category)
+    properties: Properties[]
 }
 
 export { Categories }

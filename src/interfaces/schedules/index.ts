@@ -14,4 +14,6 @@ export interface IScheduleResponse {
     date: string
     hour: string
     id: string
+    message?: string
+    schedules: object
 }
